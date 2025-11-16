@@ -36,7 +36,6 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </header>
 
-    <!-- Герой секция -->
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Умный календарь для управления событиями</h1>

@@ -4,7 +4,7 @@ require_once 'includes/auth_check.php';
 require_once 'includes/header.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database -> getConnection();
 
 // Получение категорий
 $categories_query = "SELECT * FROM categories";
