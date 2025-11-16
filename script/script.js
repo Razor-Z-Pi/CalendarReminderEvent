@@ -1,9 +1,6 @@
-// Enhanced animations for modern forms
 document.addEventListener('DOMContentLoaded', function() {
-    // Add floating labels functionality
     const formControls = document.querySelectorAll('.form-control');
     formControls.forEach(control => {
-        // Create floating label if doesn't exist
         if (!control.nextElementSibling?.classList.contains('floating-label')) {
             const label = control.previousElementSibling;
             if (label && label.tagName === 'LABEL') {
@@ -15,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Add focus/blur events
         control.addEventListener('focus', function() {
             this.parentElement.classList.add('focused');
         });
@@ -26,33 +22,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Check initial state
         if (control.value) {
             control.parentElement.classList.add('focused');
         }
     });
 
-    // Form submission animations
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             const submitBtn = this.querySelector('button[type="submit"]');
             if (submitBtn) {
-                // Add loading state
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
                 
-                // Create loading text
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<span class="loading"></span> Отправка...';
                 
-                // Revert after delay (for demo)
                 setTimeout(() => {
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
                     
-                    // Add success animation
                     this.classList.add('success');
                     setTimeout(() => this.classList.remove('success'), 2000);
                 }, 2000);
@@ -60,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hover animations for cards
     const cards = document.querySelectorAll('.event-card, .report-item');
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -72,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scrolling for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -86,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Parallax effect for login container
     const loginContainer = document.querySelector('.login-container');
     if (loginContainer) {
         document.addEventListener('mousemove', (e) => {
@@ -96,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Typewriter effect for titles
     const titles = document.querySelectorAll('.section-title, .login-title');
     titles.forEach(title => {
         const text = title.textContent;
@@ -111,12 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Start typing after a delay
         setTimeout(typeWriter, 500);
     });
 });
 
-// Additional utility functions
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `alert alert-${type}`;
@@ -129,19 +113,16 @@ function showNotification(message, type = 'success') {
     
     document.body.appendChild(notification);
     
-    // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Remove after delay
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => notification.remove(), 300);
     }, 5000);
 }
 
-// Initialize tooltips
 function initTooltips() {
     const elements = document.querySelectorAll('[data-tooltip]');
     elements.forEach(el => {
