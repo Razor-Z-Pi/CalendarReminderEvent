@@ -13,7 +13,7 @@ class Database {
             $this -> conn -> exec("set names utf8");
             $this -> conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $exception) {
-            echo "Ошибка подключения: " . $exception->getMessage();
+            echo "Ошибка подключения: " . $exception -> getMessage();
         }
         return $this -> conn;
     }

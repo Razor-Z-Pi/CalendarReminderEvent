@@ -4,7 +4,7 @@ require_once 'includes/auth_check.php';
 require_once 'includes/header.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database -> getConnection();
 
 // Обработка добавления отчета
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_report'])) {
@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_report'])) {
                   VALUES (:event_id, :title, :description, :author_id)";
         
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':event_id', $event_id);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':author_id', $_SESSION['user_id']);
+        $stmt -> bindParam(':event_id', $event_id);
+        $stmt -> bindParam(':title', $title);
+        $stmt -> bindParam(':description', $description);
+        $stmt -> bindParam(':author_id', $_SESSION['user_id']);
         
         if ($stmt->execute()) {
             $report_id = $db->lastInsertId();
@@ -87,11 +87,11 @@ $reports = $reports_stmt->fetchAll(PDO::FETCH_ASSOC);
 // Получение событий для выпадающего списка
 $events_query = "SELECT id, title FROM events WHERE author_id = :user_id OR responsible_users LIKE :username 
                  ORDER BY event_date DESC";
-$events_stmt = $db->prepare($events_query);
-$events_stmt->bindParam(':user_id', $_SESSION['user_id']);
+$events_stmt = $db -> prepare($events_query);
+$events_stmt -> bindParam(':user_id', $_SESSION['user_id']);
 $username = '%' . $_SESSION['username'] . '%';
-$events_stmt->bindParam(':username', $username);
-$events_stmt->execute();
+$events_stmt -> bindParam(':username', $username);
+$events_stmt -> execute();
 $events = $events_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

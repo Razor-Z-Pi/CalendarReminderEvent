@@ -4,7 +4,7 @@ require_once 'config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $database = new Database();
-    $db = $database->getConnection();
+    $db = $database -> getConnection();
     
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Проверка существующего пользователя
     $check_query = "SELECT id FROM users WHERE username = :username OR email = :email";
     $check_stmt = $db->prepare($check_query);
-    $check_stmt->bindParam(':username', $username);
-    $check_stmt->bindParam(':email', $email);
-    $check_stmt->execute();
+    $check_stmt -> bindParam(':username', $username);
+    $check_stmt -> bindParam(':email', $email);
+    $check_stmt -> execute();
     
-    if ($check_stmt->rowCount() > 0) {
+    if ($check_stmt -> rowCount() > 0) {
         $errors[] = "Пользователь с таким именем или email уже существует";
     }
     
@@ -45,12 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
         $query = "INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 'user')";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashed_password);
+        $stmt = $db -> prepare($query);
+        $stmt -> bindParam(':username', $username);
+        $stmt -> bindParam(':email', $email);
+        $stmt -> bindParam(':password', $hashed_password);
         
-        if ($stmt->execute()) {
+        if ($stmt -> execute()) {
             $_SESSION['success'] = "Регистрация успешна! Теперь вы можете войти.";
             header("Location: login.php");
             exit();
@@ -67,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация - Календарь событий</title>
+    <link rel="stylesheet" href="./style/normalize.css">
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary" style="width: 100%;">Зарегистрироваться</button>
         </form>
         
-        <div style="text-align: center; margin-top: 20px;">
+        <div class="login-redirect">
             <p>Уже есть аккаунт? <a href="login.php">Войдите</a></p>
         </div>
     </div>

@@ -4,13 +4,13 @@ require_once 'config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $database = new Database();
-    $db = $database->getConnection();
+    $db = $database -> getConnection();
     
     $username = $_POST['username'];
     $password = $_POST['password'];
     
     $query = "SELECT * FROM users WHERE username = :username";
-    $stmt = $db->prepare($query);
+    $stmt = $db -> prepare($query);
     $stmt->bindParam(':username', $username);
     $stmt->execute();
     
@@ -37,32 +37,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход - Календарь событий</title>
+    <link rel="stylesheet" href="./style/normalize.css">
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2 class="login-title">Вход в систему</h2>
-        
-        <?php if (isset($error)): ?>
-        <div class="alert alert-error"><?php echo $error; ?></div>
-        <?php endif; ?>
-        
-        <form method="POST" action="">
-            <div class="form-group">
-                <label for="username">Имя пользователя</label>
-                <input type="text" id="username" name="username" class="form-control" required>
+    <section class="box-login">
+        <div class="login-container">
+            <h2 class="login-title">Вход в систему</h2>
+            
+            <?php if (isset($error)): ?>
+            <div class="alert alert-error"><?php echo $error; ?></div>
+            <?php endif; ?>
+            
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
+            </form>
+            
+            <div class="login-redirect">
+                <p>Нет аккаунта? <a href="register.php">Зарегистрируйтесь</a></p>
             </div>
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
-        </form>
-        
-        <div style="text-align: center; margin-top: 20px;">
-            <p>Нет аккаунта? <a href="register.php">Зарегистрируйтесь</a></p>
+            
         </div>
-        
-    </div>
+    </section>
 </body>
 </html>

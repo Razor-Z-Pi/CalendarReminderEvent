@@ -65,15 +65,31 @@ nav {
     padding: 1rem 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
+.box-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 900px;
+}
+
 .login-container {
     max-width: 440px;
-    margin: 40px auto;
+    width: 400px;
+
+    margin: auto;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -111,6 +127,22 @@ nav {
 @keyframes shimmer {
     0% { transform: rotate(45deg) translateX(-100%); }
     100% { transform: rotate(45deg) translateX(100%); }
+}
+
+.login-redirect {
+    text-align: center; 
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.login-redirect a {
+    color: var(--primary-color);
+    transition: color .5s ease-in-out;
+}
+
+.login-redirect a:hover,
+.login-redirect a:focus {
+    color: var(--secondary-color)
 }
 
 .login-title {
@@ -193,16 +225,15 @@ nav {
     top: 50%;
     transform: translateY(-50%);
     font-size: 1rem;
-    color: #a0aec0;
+    color: var(--primary-color);
 }
 
 .form-control:focus + .floating-label,
 .form-control:not(:placeholder-shown) + .floating-label {
     top: -10px;
     left: 12px;
-    font-size: 0.75rem;
+    font-size: 14px;
     color: var(--primary-color);
-    background: white;
     padding: 0 8px;
 }
 
@@ -218,6 +249,8 @@ nav {
     overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+
+    color: var(--primary-dark);
 }
 
 .btn::before {
@@ -498,6 +531,7 @@ nav {
 .event-category {
     display: inline-block;
     padding: 6px 12px;
+    margin: 10px;
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
@@ -652,6 +686,7 @@ nav {
     .login-container {
         margin: 20px;
         padding: 2rem 1.5rem;
+        width: 100%;
     }
     
     .section {
