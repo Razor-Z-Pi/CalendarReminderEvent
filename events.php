@@ -4,7 +4,7 @@ require_once 'includes/auth_check.php';
 require_once 'includes/header.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database -> getConnection();
 
 // Обработка удаления события
 if (isset($_GET['delete_id'])) {
@@ -12,17 +12,17 @@ if (isset($_GET['delete_id'])) {
     
     // Проверяем, принадлежит ли событие пользователю или пользователь - администратор
     $check_query = "SELECT * FROM events WHERE id = :id AND (author_id = :user_id OR :is_admin = 1)";
-    $check_stmt = $db->prepare($check_query);
-    $check_stmt->bindParam(':id', $delete_id);
-    $check_stmt->bindParam(':user_id', $_SESSION['user_id']);
+    $check_stmt = $db -> prepare($check_query);
+    $check_stmt -> bindParam(':id', $delete_id);
+    $check_stmt -> bindParam(':user_id', $_SESSION['user_id']);
     $is_admin = ($_SESSION['user_role'] == 'admin') ? 1 : 0;
-    $check_stmt->bindParam(':is_admin', $is_admin);
-    $check_stmt->execute();
+    $check_stmt -> bindParam(':is_admin', $is_admin);
+    $check_stmt -> execute();
     
-    if ($check_stmt->rowCount() > 0) {
+    if ($check_stmt -> rowCount() > 0) {
         $delete_query = "DELETE FROM events WHERE id = :id";
-        $delete_stmt = $db->prepare($delete_query);
-        $delete_stmt->bindParam(':id', $delete_id);
+        $delete_stmt = $db -> prepare($delete_query);
+        $delete_stmt -> bindParam(':id', $delete_id);
         
         if ($delete_stmt->execute()) {
             $_SESSION['success'] = "Событие успешно удалено";
@@ -86,22 +86,22 @@ $sort_options = [
 $query .= " ORDER BY " . ($sort_options[$sort_by] ?? 'e.event_date ASC');
 
 // Выполнение запроса
-$stmt = $db->prepare($query);
+$stmt = $db -> prepare($query);
 foreach ($params as $key => $value) {
-    $stmt->bindValue($key, $value);
+    $stmt -> bindValue($key, $value);
 }
 $stmt->execute();
-$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$events = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 // Получение категорий для фильтра
 $categories_query = "SELECT * FROM categories";
-$categories_stmt = $db->query($categories_query);
-$categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
+$categories_stmt = $db -> query($categories_query);
+$categories = $categories_stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 // Получение авторов для фильтра
 $authors_query = "SELECT id, username FROM users";
-$authors_stmt = $db->query($authors_query);
-$authors = $authors_stmt->fetchAll(PDO::FETCH_ASSOC);
+$authors_stmt = $db -> query($authors_query);
+$authors = $authors_stmt -> fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <main class="container">

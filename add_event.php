@@ -8,8 +8,8 @@ $db = $database -> getConnection();
 
 // Получение категорий
 $categories_query = "SELECT * FROM categories";
-$categories_stmt = $db->query($categories_query);
-$categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
+$categories_stmt = $db -> query($categories_query);
+$categories = $categories_stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 // Обработка формы
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -44,13 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   VALUES (:title, :description, :event_date, :event_type, :category_id, :author_id, :responsible_users)";
         
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':event_date', $event_date);
-        $stmt->bindParam(':event_type', $event_type);
-        $stmt->bindParam(':category_id', $category_id);
-        $stmt->bindParam(':author_id', $_SESSION['user_id']);
-        $stmt->bindParam(':responsible_users', $responsible_users);
+        $stmt -> bindParam(':title', $title);
+        $stmt -> bindParam(':description', $description);
+        $stmt -> bindParam(':event_date', $event_date);
+        $stmt -> bindParam(':event_type', $event_type);
+        $stmt -> bindParam(':category_id', $category_id);
+        $stmt -> bindParam(':author_id', $_SESSION['user_id']);
+        $stmt -> bindParam(':responsible_users', $responsible_users);
         
         if ($stmt->execute()) {
             $_SESSION['success'] = "Событие успешно добавлено";

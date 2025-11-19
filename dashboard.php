@@ -99,6 +99,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 
 <script src="./script/script.js"></script>
+<script src="./script/calendari.js"></script>
 <script>
     // Инициализация календаря с событиями из PHP
     const eventsData = <?php echo json_encode($events); ?>;
